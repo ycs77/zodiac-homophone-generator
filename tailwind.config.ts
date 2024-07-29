@@ -1,4 +1,7 @@
 import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
+import colors from 'tailwindcss/colors'
+import Forms from '@tailwindcss/forms'
 
 export default {
   content: [
@@ -6,7 +9,17 @@ export default {
     './src/**/*.{vue,js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        gray: colors.neutral,
+      },
+      fontFamily: {
+        sans: ['"Noto Sans TC"', ...fontFamily.sans],
+        serif: ['"Noto Serif TC"', ...fontFamily.serif],
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    Forms(),
+  ],
 } satisfies Config

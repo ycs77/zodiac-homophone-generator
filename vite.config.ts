@@ -3,8 +3,6 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
-import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
-import Pages from 'vite-plugin-pages'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 
@@ -24,12 +22,10 @@ export default defineConfig({
     }),
     Components({
       resolvers: [
-        HeadlessUiResolver(),
         IconsResolver({ prefix: '' }),
       ],
       dts: 'src/shims/components.d.ts',
     }),
-    Pages(),
     Icons(),
   ],
   resolve: {
