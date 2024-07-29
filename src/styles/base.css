@@ -1,5 +1,5 @@
 @layer base {
   body {
-    @apply font-serif font-light;
+    @apply font-serif font-light selection:bg-black selection:text-white;
   }
 }
