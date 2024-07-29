@@ -238,6 +238,11 @@
         X
       </button>
     </div>
+
+    <footer class="absolute left-4 bottom-16 md:bottom-3 z-[-1] md:z-auto text-xs text-gray-400">
+      © 2024 Lucas Yang<br>
+      網站由 <a href="https://star-note-lucas.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-gray-600">Lucas Yang</a> 建立，<a href="https://github.com/justfont/AllPunType" target="_blank" rel="noopener noreferrer" class="text-gray-600">諧靈附體</a> 字型由 <a href="https://justfont.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600">justfont</a> 建立。
+    </footer>
   </div>
 </template>
 
