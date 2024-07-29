@@ -41,20 +41,15 @@
           <h4 class="text-xl font-bold">範本</h4>
           <div class="mt-3 flex gap-3">
             <button
+              v-for="template in templates"
               type="button"
               class="w-9 h-9 flex justify-center items-center text-lg bg-white font-bold border-2 border-black"
-            >
-              文
-            </button>
-            <button
-              type="button"
-              class="w-9 h-9 flex justify-center items-center text-lg bg-black text-white font-bold border-2 border-black"
-            >
-              文
-            </button>
-            <button
-              type="button"
-              class="w-9 h-9 flex justify-center items-center text-lg bg-blue-600 text-white font-bold border-2 border-blue-600"
+              :style="{
+                color: template.fontColor,
+                backgroundColor: template.bgColor,
+                borderColor: template.borderColor ?? template.bgColor,
+              }"
+              @click="applyTemplate(template)"
             >
               文
             </button>
@@ -248,6 +243,7 @@
 
 <script setup lang="ts">
 import { RadioGroupItem, RadioGroupRoot, SwitchRoot, SwitchThumb } from 'radix-vue'
+import { templates } from './templates'
 
 const currentTab = ref<string | null>('content')
 
@@ -261,6 +257,12 @@ const form = reactive({
   enableAllPunType: true,
   bgColor: '#ffffff',
 })
+
+function applyTemplate(template: typeof templates[number]) {
+  form.fontColor = template.fontColor
+  form.zodiacFontColor = template.zodiacFontColor
+  form.bgColor = template.bgColor
+}
 
 function downloadImage() {
   //
