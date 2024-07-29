@@ -26,22 +26,23 @@
       <div class="grow min-h-0 overflow-y-auto">
         <div
           class="px-5 py-4 md:block md:py-5 md:border-b-2 md:border-black"
-          :class="{ 'hidden': currentTab !== 'content' }"
+          :class="{ hidden: currentTab !== 'content' }"
         >
           <h4 class="text-xl font-bold">文字內容</h4>
           <div class="mt-3">
-            <textarea v-model="form.content" class="w-full border-2 resize-none focus:border-black focus:ring-black"></textarea>
+            <textarea v-model="form.content" class="w-full border-2 resize-none focus:border-black focus:ring-black" />
           </div>
         </div>
 
         <div
           class="px-5 py-4 md:block md:py-5 md:border-b-2 md:border-black"
-          :class="{ 'hidden': currentTab !== 'template' }"
+          :class="{ hidden: currentTab !== 'template' }"
         >
           <h4 class="text-xl font-bold">範本</h4>
           <div class="mt-3 flex gap-3">
             <button
               v-for="template in templates"
+              :key="`template-c${template.fontColor}-bg${template.bgColor}`"
               type="button"
               class="w-9 h-9 flex justify-center items-center text-lg bg-white font-bold border-2 border-black"
               :style="{
@@ -58,20 +59,20 @@
 
         <div
           class="px-5 py-4 md:block md:py-5 md:border-b-2 md:border-black"
-          :class="{ 'hidden': currentTab !== 'font' }"
+          :class="{ hidden: currentTab !== 'font' }"
         >
           <h4 class="text-xl font-bold">文字</h4>
           <div class="mt-3 flex justify-between items-center">
             <label>文字大小</label>
-            <input type="number" v-model="form.fontSize" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
+            <input v-model="form.fontSize" type="number" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
           </div>
           <div class="mt-3 flex justify-between items-center">
             <label>文字顏色</label>
-            <input type="color" v-model="form.fontColor" class="w-[80px] p-0">
+            <input v-model="form.fontColor" type="color" class="w-[80px] p-0">
           </div>
           <div class="mt-3 flex justify-between items-center">
             <label>生肖文字顏色</label>
-            <input type="color" v-model="form.zodiacFontColor" class="w-[80px] p-0">
+            <input v-model="form.zodiacFontColor" type="color" class="w-[80px] p-0">
           </div>
           <div class="mt-3 flex justify-between items-center">
             <label>文字對齊</label>
@@ -156,7 +157,7 @@
 
         <div
           class="px-5 py-4 md:block md:py-5 md:border-b-2 md:border-black"
-          :class="{ 'hidden': currentTab !== 'bg' }"
+          :class="{ hidden: currentTab !== 'bg' }"
         >
           <h4 class="text-xl font-bold">背景</h4>
           <div class="mt-3 flex justify-between items-center">

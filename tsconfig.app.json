@@ -8,12 +8,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["src/**/__tests__/*"],
   "include": [
     "src/shims/env.d.ts",
     "src/shims/components.d.ts",
     "src/shims/auto-imports.d.ts",
     "src/**/*",
     "src/**/*.vue"
-  ]
+  ],
+  "exclude": ["src/**/__tests__/*"]
 }
