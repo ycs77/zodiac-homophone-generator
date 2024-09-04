@@ -1,8 +1,6 @@
-# Lucas Yang's Vue & TS Starter
+# 生肖諧音字產生器
 
-> Start a new project: `npx degit ycs77/vue-ts-starter my-project`
-
-## Installation
+## 安裝
 
 ```bash
 yarn
