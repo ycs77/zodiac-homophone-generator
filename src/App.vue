@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-col md:flex-row">
+  <div class="h-dvh flex flex-col md:flex-row">
     <div class="flex-1 min-h-0 flex flex-col">
       <header class="flex justify-between items-center px-4 py-3">
         <h1 class="text-xl font-bold">生肖諧音字產生器</h1>
