@@ -10,5 +10,6 @@ declare module 'vue' {
     Canvas: typeof import('./../components/Canvas.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SvgSpinnersBarsScaleFade: typeof import('~icons/svg-spinners/bars-scale-fade')['default']
   }
 }

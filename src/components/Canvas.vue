@@ -1,6 +1,10 @@
 <template>
-  <div class="border-2 border-black">
+  <div class="relative w-full h-full border-2 border-black">
     <div ref="el" />
+
+    <div v-if="loading" class="absolute inset-0 flex items-center justify-center bg-white">
+      <SvgSpinnersBarsScaleFade class="h-10 w-10 text-black" />
+    </div>
   </div>
 </template>
 
@@ -34,6 +38,7 @@ const props = withDefaults(defineProps<{
 })
 
 const el = ref() as Ref<HTMLDivElement>
+const loading = ref(true)
 
 const scale = 2
 const width = 500 * scale
@@ -155,6 +160,8 @@ onMounted(async () => {
           fontSize: '24px',
           color: props.fontColor,
         }).setOrigin(1, 1)
+
+        loading.value = false
       },
     },
     plugins: {
