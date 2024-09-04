@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
   fontSize?: number
   fontWeight?: number
   fontColor?: string
-  zodiacFontColor?: string
+  // zodiacFontColor?: string
   textAlign?: string
   textVerticalAlign?: string
   lineSpacing?: number
@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<{
   fontSize: 32,
   fontWeight: 400,
   fontColor: '#000000',
-  zodiacFontColor: '#ff0000',
+  // zodiacFontColor: '#ff0000',
   textAlign: 'center',
   textVerticalAlign: 'middle',
   lineSpacing: 0,

@@ -91,10 +91,10 @@
             <label>文字顏色</label>
             <input v-model="form.fontColor" type="color" class="w-[80px] p-0">
           </div>
-          <div class="mt-3 flex justify-between items-center">
+          <!-- <div class="mt-3 flex justify-between items-center">
             <label>生肖文字顏色</label>
             <input v-model="form.zodiacFontColor" type="color" class="w-[80px] p-0">
-          </div>
+          </div> -->
           <div class="mt-3 flex justify-between items-center">
             <label>文字對齊</label>
             <RadioGroupRoot
@@ -283,7 +283,7 @@ const form = reactive({
   fontSize: 32,
   fontWeight: 700,
   fontColor: '#000000',
-  zodiacFontColor: '#ff0000',
+  // zodiacFontColor: '#ff0000',
   textAlign: 'center',
   textVerticalAlign: 'middle',
   lineSpacing: 0,
@@ -294,7 +294,7 @@ const form = reactive({
 
 function applyTemplate(template: typeof templates[number]) {
   form.fontColor = template.fontColor
-  form.zodiacFontColor = template.zodiacFontColor
+  // form.zodiacFontColor = template.zodiacFontColor
   form.bgColor = template.bgColor
 }
 
