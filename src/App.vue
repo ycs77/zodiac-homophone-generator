@@ -279,8 +279,8 @@ const currentTab = ref<string | null>('content')
 const canvasRef = ref() as Ref<InstanceType<typeof Canvas>>
 
 const form = reactive({
-  content: '雖然我不屬於這方面的專家，但還是笑死我了，我真的不想扭曲原意。',
-  fontSize: 32,
+  content: '國際金融\n政治經濟\n社會時事\n時尚潮流',
+  fontSize: 60,
   fontWeight: 700,
   fontColor: '#000000',
   // zodiacFontColor: '#ff0000',
