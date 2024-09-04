@@ -13,24 +13,33 @@
         </button>
       </header>
 
-      <main class="flex-1 min-h-0 flex justify-center md:items-center">
-        <div class="flex justify-center py-8">
-          <div class="w-[70vw] h-[70vw] max-w-[350px] max-h-[350px] md:w-[400px] md:h-[400px] md:max-w-none md:max-h-none lg:w-[450px] lg:h-[450px] border-2 border-black">
-            <!-- canvas -->
-          </div>
+      <main class="flex-1 min-h-0 py-8 flex justify-center overflow-y-auto">
+        <div
+          class="
+            min-w-0
+            min-h-0
+            flex justify-center items-center
+            my-auto
+            w-[350px] h-[350px]
+            md:w-[400px] md:h-[400px]
+            lg:w-[450px] lg:h-[450px]
+            max-w-[70vw] max-h-[70vw]
+          "
+        >
+          <Canvas v-bind="form" ref="canvasRef" class="min-w-0 min-h-0" />
         </div>
       </main>
     </div>
 
     <div class="relative md:w-[260px] lg:w-[320px] flex flex-col bg-white border-t-2 md:border-t-0 md:border-l-2 border-black">
-      <div class="grow min-h-0 overflow-y-auto">
+      <div class="relative grow min-h-0 max-h-[300px] md:max-h-none overflow-y-auto">
         <div
           class="px-5 py-4 md:block md:py-5 md:border-b-2 md:border-black"
           :class="{ hidden: currentTab !== 'content' }"
         >
           <h4 class="text-xl font-bold">文字內容</h4>
           <div class="mt-3">
-            <textarea v-model="form.content" class="w-full border-2 resize-none focus:border-black focus:ring-black" />
+            <textarea v-model="form.content" class="w-full border-2 resize-none focus:border-black focus:ring-black" rows="3" />
           </div>
         </div>
 
@@ -64,7 +73,19 @@
           <h4 class="text-xl font-bold">文字</h4>
           <div class="mt-3 flex justify-between items-center">
             <label>文字大小</label>
-            <input v-model="form.fontSize" type="number" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
+            <input v-model.number="form.fontSize" type="number" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
+          </div>
+          <div class="mt-3 flex justify-between items-center">
+            <label>字重</label>
+            <select v-model.number="form.fontWeight" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
+              <option value="200">ExtraLight</option>
+              <option value="300">Light</option>
+              <option value="400">Regular</option>
+              <option value="500">Medium</option>
+              <option value="600">SemiBold</option>
+              <option value="700">Bold</option>
+              <option value="900">Heavy</option>
+            </select>
           </div>
           <div class="mt-3 flex justify-between items-center">
             <label>文字顏色</label>
@@ -78,7 +99,7 @@
             <label>文字對齊</label>
             <RadioGroupRoot
               v-model="form.textAlign"
-              class="mt-3 flex gap-2"
+              class="flex gap-2"
               aria-label="Text align"
             >
               <RadioGroupItem
@@ -91,21 +112,21 @@
               <RadioGroupItem
                 id="textAlignRight"
                 class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
-                value="right"
+                value="center"
               >
                 中
               </RadioGroupItem>
               <RadioGroupItem
                 id="textAlignCenter"
                 class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
-                value="center"
+                value="right"
               >
                 右
               </RadioGroupItem>
               <RadioGroupItem
-                id="textAlignFull"
+                id="textAlignJustify"
                 class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
-                value="full"
+                value="justify"
               >
                 滿
               </RadioGroupItem>
@@ -115,7 +136,7 @@
             <label>文字垂直對齊</label>
             <RadioGroupRoot
               v-model="form.textVerticalAlign"
-              class="mt-3 flex gap-2"
+              class="flex gap-2"
               aria-label="Text vertical align"
             >
               <RadioGroupItem
@@ -142,6 +163,14 @@
             </RadioGroupRoot>
           </div>
           <div class="mt-3 flex justify-between items-center">
+            <label>行距</label>
+            <input v-model.number="form.lineSpacing" type="number" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
+          </div>
+          <div class="mt-3 flex justify-between items-center">
+            <label>字距</label>
+            <input v-model.number="form.letterSpacing" type="number" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
+          </div>
+          <div class="mt-3 flex justify-between items-center">
             <label>諧靈附體字型</label>
             <SwitchRoot
               id="airplane-mode"
@@ -165,9 +194,18 @@
             <input v-model="form.bgColor" type="color" class="w-[80px] p-0">
           </div>
         </div>
+
+        <button
+          v-if="currentTab"
+          type="button"
+          class="absolute top-3 right-4 text-lg text-black font-bold md:hidden"
+          @click="currentTab = null"
+        >
+          X
+        </button>
       </div>
 
-      <div class="hidden md:block p-3 -mt-[2px] border-t-2 border-black">
+      <div class="hidden md:block relative z-[1] p-3 -mt-[2px] bg-white border-t-2 border-black">
         <button
           type="button"
           class="block w-full bg-black text-white py-3 text-lg font-bold"
@@ -224,36 +262,32 @@
           </li>
         </ul>
       </nav>
-
-      <button
-        v-if="currentTab"
-        type="button"
-        class="absolute top-3 right-4 text-lg text-black font-bold md:hidden"
-        @click="currentTab = null"
-      >
-        X
-      </button>
     </div>
 
     <footer class="absolute left-4 bottom-16 md:bottom-3 z-[-1] md:z-auto text-xs text-gray-400">
-      網站由 <a href="https://star-note-lucas.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-gray-600">Lucas Yang</a> 建立，<a href="https://github.com/justfont/AllPunType" target="_blank" rel="noopener noreferrer" class="text-gray-600">諧靈附體</a> 字型來自 <a href="https://justfont.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600">justfont</a>
+      網站由 <a href="https://star-note-lucas.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-gray-600">Lucas Yang</a> 製作，<a href="https://github.com/justfont/AllPunType" target="_blank" rel="noopener noreferrer" class="text-gray-600">諧靈附體</a> 字型來自 <a href="https://justfont.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600">justfont</a>
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { RadioGroupItem, RadioGroupRoot, SwitchRoot, SwitchThumb } from 'radix-vue'
+import Canvas from './components/Canvas.vue'
 import { templates } from './templates'
 
 const currentTab = ref<string | null>('content')
+const canvasRef = ref() as Ref<InstanceType<typeof Canvas>>
 
 const form = reactive({
-  content: '雖然我不鼠於這方面的專家，但還鼠笑鼠我了，我真的不想牛曲原意。',
-  fontSize: 21,
+  content: '雖然我不屬於這方面的專家，但還是笑死我了，我真的不想扭曲原意。',
+  fontSize: 32,
+  fontWeight: 700,
   fontColor: '#000000',
   zodiacFontColor: '#ff0000',
   textAlign: 'center',
   textVerticalAlign: 'middle',
+  lineSpacing: 0,
+  letterSpacing: 0,
   enableAllPunType: true,
   bgColor: '#ffffff',
 })
@@ -265,6 +299,6 @@ function applyTemplate(template: typeof templates[number]) {
 }
 
 function downloadImage() {
-  //
+  canvasRef.value.downloadImage()
 }
 </script>
