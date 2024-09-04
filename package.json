@@ -10,10 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@vueuse/core": "^10.0.0",
-    "radix-vue": "^1.9.2",
-    "vue": "^3.4.0",
-    "vue-router": "^4.2.5"
+    "@vueuse/core": "^11.0.0",
+    "radix-vue": "^1.9.5",
+    "vue": "^3.5.0",
+    "vue-router": "^4.4.0"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.1.10",
@@ -22,8 +22,8 @@
     "@types/node": "^20.0.0",
     "@vitejs/plugin-vue": "^5.0.0",
     "@vue/tsconfig": "^0.5.1",
-    "@ycs77/eslint-config": "^2.3.0",
-    "autoprefixer": "^10.4.16",
+    "@ycs77/eslint-config": "^2.4.2",
+    "autoprefixer": "^10.4.20",
     "eslint": "^9.0.0",
     "npm-run-all2": "^6.1.2",
     "postcss": "^8.4.0",
