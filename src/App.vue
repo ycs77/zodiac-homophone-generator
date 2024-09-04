@@ -91,10 +91,10 @@
             <label>文字顏色</label>
             <input v-model="form.fontColor" type="color" class="w-[80px] p-0">
           </div>
-          <!-- <div class="mt-3 flex justify-between items-center">
+          <div class="mt-3 flex justify-between items-center">
             <label>生肖文字顏色</label>
             <input v-model="form.zodiacFontColor" type="color" class="w-[80px] p-0">
-          </div> -->
+          </div>
           <div class="mt-3 flex justify-between items-center">
             <label>文字對齊</label>
             <RadioGroupRoot
@@ -122,13 +122,6 @@
                 value="right"
               >
                 右
-              </RadioGroupItem>
-              <RadioGroupItem
-                id="textAlignJustify"
-                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
-                value="justify"
-              >
-                滿
               </RadioGroupItem>
             </RadioGroupRoot>
           </div>
@@ -165,10 +158,6 @@
           <div class="mt-3 flex justify-between items-center">
             <label>行距</label>
             <input v-model.number="form.lineSpacing" type="number" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
-          </div>
-          <div class="mt-3 flex justify-between items-center">
-            <label>字距</label>
-            <input v-model.number="form.letterSpacing" type="number" class="w-[80px] px-1 py-0 font-sans border-2 focus:border-black focus:ring-black">
           </div>
           <div class="mt-3 flex justify-between items-center">
             <label>諧靈附體字型</label>
@@ -283,18 +272,17 @@ const form = reactive({
   fontSize: 60,
   fontWeight: 700,
   fontColor: '#000000',
-  // zodiacFontColor: '#ff0000',
-  textAlign: 'center',
-  textVerticalAlign: 'middle',
+  zodiacFontColor: '#ff0000',
+  textAlign: 'center' as 'left' | 'center' | 'right',
+  textVerticalAlign: 'middle' as 'top' | 'middle' | 'bottom',
   lineSpacing: 0,
-  letterSpacing: 0,
   enableAllPunType: true,
   bgColor: '#ffffff',
 })
 
 function applyTemplate(template: typeof templates[number]) {
   form.fontColor = template.fontColor
-  // form.zodiacFontColor = template.zodiacFontColor
+  form.zodiacFontColor = template.zodiacFontColor
   form.bgColor = template.bgColor
 }
 

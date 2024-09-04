@@ -1,11 +1,13 @@
 <template>
-  <div class="border-2" style="border-color: #000;">
+  <div class="border-2 border-black">
     <div ref="el" />
   </div>
 </template>
 
 <script setup lang="ts">
 import Phaser from 'phaser'
+import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js'
+import type BBCodeText from 'phaser3-rex-plugins/plugins/gameobjects/tagtext/bbcodetext/BBCodeText'
 import dayjs from 'dayjs'
 
 const props = withDefaults(defineProps<{
@@ -13,22 +15,20 @@ const props = withDefaults(defineProps<{
   fontSize?: number
   fontWeight?: number
   fontColor?: string
-  // zodiacFontColor?: string
-  textAlign?: string
+  zodiacFontColor?: string
+  textAlign?: 'left' | 'center' | 'right'
   textVerticalAlign?: string
   lineSpacing?: number
-  letterSpacing?: number
   enableAllPunType?: boolean
   bgColor?: string
 }>(), {
   fontSize: 32,
   fontWeight: 400,
   fontColor: '#000000',
-  // zodiacFontColor: '#ff0000',
+  zodiacFontColor: '#ff0000',
   textAlign: 'center',
   textVerticalAlign: 'middle',
   lineSpacing: 0,
-  letterSpacing: 0,
   enableAllPunType: true,
   bgColor: '#ffffff',
 })
@@ -41,18 +41,20 @@ const height = 500 * scale
 
 let game: Phaser.Game
 let camera: Phaser.Cameras.Scene2D.Camera
-let contentText: Phaser.GameObjects.Text
+let contentText: BBCodeText
 let sourceTipText: Phaser.GameObjects.Text
 
-watch(() => props.content, () => contentText.setText(props.content))
+watch([
+  () => props.content,
+  () => props.fontWeight,
+  () => props.zodiacFontColor,
+], () => contentText.setText(getContent(props.content)))
 watch(() => props.fontSize, () => contentText.setFontSize(getFontSize(props.fontSize)))
-watch(() => props.fontWeight, () => contentText.setFontStyle(`${props.fontWeight}`))
 watch(() => props.fontColor, () => {
   contentText.setColor(props.fontColor)
   sourceTipText.setColor(props.fontColor)
 })
-// watch(() => props.zodiacFontColor, () => content.setText(props.zodiacFontColor))
-watch(() => props.textAlign, () => contentText.setAlign(props.textAlign))
+watch(() => props.textAlign, () => contentText.setHAlign(props.textAlign))
 watch(() => props.textVerticalAlign, () => {
   const position = getPosition(props.textVerticalAlign)
   const origin = getOrigin(props.textVerticalAlign)
@@ -62,9 +64,21 @@ watch(() => props.textVerticalAlign, () => {
     .setOrigin(origin.x, origin.y)
 })
 watch(() => props.lineSpacing, () => contentText.setLineSpacing(props.lineSpacing))
-watch(() => props.letterSpacing, () => contentText.setLetterSpacing(props.letterSpacing))
 watch(() => props.enableAllPunType, () => contentText.setFontFamily(getFontFamily(props.enableAllPunType)))
 watch(() => props.bgColor, () => camera.setBackgroundColor(props.bgColor))
+
+function getContent(content: string) {
+  content = content.replace('[', '').replace(']', '')
+  content = `[weight=${props.fontWeight}]${content}[/weight]`
+
+  return content.split('')
+    .map(char =>
+      isAllpuntypeChar(char)
+        ? `[color=${props.zodiacFontColor}]${char}[/color]`
+        : char
+    )
+    .join('')
+}
 
 function getFontSize(fontSize: number) {
   return `${fontSize * scale}px`
@@ -111,32 +125,25 @@ onMounted(() => {
     disableContextMenu: true,
     preserveDrawingBuffer: true,
     scene: {
-      preload() {
-        // this.load.image('logo', 'assets/logo.png')
-      },
       create() {
-        // this.add.image(400, 300, 'logo')
-
         camera = this.cameras.main
         camera.setBackgroundColor('#ffffff')
 
         const position = getPosition(props.textVerticalAlign)
         const origin = getOrigin(props.textVerticalAlign)
 
-        contentText = this.add.text(position.x, position.y, props.content, {
+        contentText = this.add.rexBBCodeText(position.x, position.y, getContent(props.content), {
           fontFamily: getFontFamily(props.enableAllPunType),
-          fontStyle: `${props.fontWeight}`,
+          fontStyle: '100',
           fontSize: getFontSize(props.fontSize),
           color: props.fontColor,
-          align: props.textAlign,
+          halign: props.textAlign,
           lineSpacing: props.lineSpacing,
-          wordWrap: {
+          wrap: {
+            mode: 'mix',
             width: Math.floor(width * 0.8),
-            useAdvancedWrap: true,
           },
-        })
-          .setOrigin(origin.x, origin.y)
-          .setLetterSpacing(props.letterSpacing)
+        }).setOrigin(origin.x, origin.y)
 
         sourceTipText = this.add.text(width - 20, height - 20, '本圖片由「生肖諧音字產生器」產生', {
           fontFamily: 'system-ui',
@@ -144,6 +151,11 @@ onMounted(() => {
           color: props.fontColor,
         }).setOrigin(1, 1)
       },
+    },
+    plugins: {
+      global: [
+        { key: 'rexBBCodeTextPlugin', plugin: BBCodeTextPlugin, start: true },
+      ],
     },
   })
 })
