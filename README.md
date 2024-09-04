@@ -2,6 +2,10 @@
 
 ![生肖諧音字產生器 網頁截圖](screenshot.png)
 
+<p align="center"><strong>一起來產生生肖諧音字~</strong></p>
+
+---
+
 使用 [Vue.js](https://vuejs.org/) 和 [Phaser](https://phaser.io/) 製作的生肖諧音字產生器網站。
 
 ## 安裝
