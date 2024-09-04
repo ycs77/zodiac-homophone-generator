@@ -112,7 +112,12 @@ function downloadImage() {
   link.click()
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await loadFont('諧靈附體', '/fonts/AllPunType-Bold.otf', {
+    weight: '700',
+    style: 'normal',
+  })
+
   game = new Phaser.Game({
     type: Phaser.AUTO,
     parent: el.value,
@@ -157,6 +162,31 @@ onMounted(() => {
         { key: 'rexBBCodeTextPlugin', plugin: BBCodeTextPlugin, start: true },
       ],
     },
+  })
+
+  loadFont('諧靈附體', '/fonts/AllPunType-ExtraLight.otf', {
+    weight: '200',
+    style: 'normal',
+  })
+  loadFont('諧靈附體', '/fonts/AllPunType-Light.otf', {
+    weight: '300',
+    style: 'normal',
+  })
+  loadFont('諧靈附體', '/fonts/AllPunType-Regular.otf', {
+    weight: '400',
+    style: 'normal',
+  })
+  loadFont('諧靈附體', '/fonts/AllPunType-Medium.otf', {
+    weight: '500',
+    style: 'normal',
+  })
+  loadFont('諧靈附體', '/fonts/AllPunType-SemiBold.otf', {
+    weight: '600',
+    style: 'normal',
+  })
+  loadFont('諧靈附體', '/fonts/AllPunType-Heavy.otf', {
+    weight: '900',
+    style: 'normal',
   })
 })
 
