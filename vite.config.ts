@@ -14,7 +14,7 @@ export default defineConfig({
         'vue',
         {
           'vue-router': ['useRoute', 'useRouter'],
-          '@vueuse/core': [],
+          '@vueuse/core': ['useLocalStorage'],
         },
       ],
       dirs: ['src/composables', 'src/utils'],

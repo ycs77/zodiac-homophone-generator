@@ -49,19 +49,60 @@
         >
           <h4 class="text-xl font-bold">範本</h4>
           <div class="mt-3 flex gap-3">
-            <button
+            <div
               v-for="template in templates"
               :key="`template-c${template.fontColor}-bg${template.bgColor}`"
-              type="button"
-              class="w-9 h-9 flex justify-center items-center text-lg bg-white font-bold border-2 border-black"
-              :style="{
-                color: template.fontColor,
-                backgroundColor: template.bgColor,
-                borderColor: template.borderColor ?? template.bgColor,
-              }"
-              @click="applyTemplate(template)"
             >
-              文
+              <button
+                type="button"
+                class="w-9 h-9 flex justify-center items-center text-lg bg-white font-bold border-2 border-black"
+                :style="{
+                  color: template.fontColor,
+                  backgroundColor: template.bgColor,
+                  borderColor: template.borderColor ?? template.bgColor,
+                }"
+                @click="applyTemplate(template)"
+              >
+                文
+              </button>
+            </div>
+          </div>
+
+          <h4 class="mt-5 text-lg font-bold">自訂範本 <span class="text-xs text-gray-400">儲存在瀏覽器 (localStorage) 中</span></h4>
+          <div class="mt-3 flex gap-3">
+            <div
+              v-for="(template, index) in customTemplates"
+              :key="`template-c${template.fontColor}-bg${template.bgColor}`"
+              class="relative"
+            >
+              <button
+                type="button"
+                class="w-9 h-9 flex justify-center items-center text-lg bg-white font-bold border-2 border-black"
+                :style="{
+                  color: template.fontColor,
+                  backgroundColor: template.bgColor,
+                  borderColor: template.borderColor ?? template.bgColor,
+                }"
+                @click="applyTemplate(template)"
+              >
+                文
+              </button>
+              <button
+                type="button"
+                class="absolute top-0 right-0 w-4 h-4 flex justify-center items-center bg-white hover:bg-gray-200 font-bold border border-black translate-x-1/3 -translate-y-1/3 before:absolute before:block before:w-full before:h-full before:scale-[2]"
+                title="刪除此自訂範本"
+                @click="removeCustomTemplate(index)"
+              >
+                <HeroiconsMinusSmall20Solid class="size-4" />
+              </button>
+            </div>
+            <button
+              type="button"
+              class="w-9 h-9 flex justify-center items-center bg-gray-100 font-bold border-dashed border-2 border-black"
+              title="儲存當前設定到瀏覽器 (localStorage) 中"
+              @click="saveCustomTemplate"
+            >
+              <HeroiconsPlusSmall20Solid class="size-6" />
             </button>
           </div>
         </div>
@@ -263,27 +304,56 @@
 import { RadioGroupItem, RadioGroupRoot, SwitchRoot, SwitchThumb } from 'radix-vue'
 import Canvas from './components/Canvas.vue'
 import { templates } from './templates'
+import type { ZodiacHomophoneForm, ZodiacHomophoneTemplate } from './types'
 
-const currentTab = ref<string | null>('content')
 const canvasRef = ref() as Ref<InstanceType<typeof Canvas>>
 
-const form = reactive({
+const currentTab = ref<string | null>('content')
+const customTemplates = useLocalStorage<ZodiacHomophoneTemplate[]>('zodiac-homophone-generator:custom-tempaltes', [])
+
+const form: ZodiacHomophoneForm = reactive({
   content: '國際金融\n政治經濟\n社會時事\n時尚潮流',
   fontSize: 60,
   fontWeight: 700,
   fontColor: '#000000',
   zodiacFontColor: '#ff0000',
-  textAlign: 'center' as 'left' | 'center' | 'right',
-  textVerticalAlign: 'middle' as 'top' | 'middle' | 'bottom',
+  textAlign: 'center',
+  textVerticalAlign: 'middle',
   lineSpacing: 0,
   enableAllPunType: true,
   bgColor: '#ffffff',
-})
+} satisfies ZodiacHomophoneForm)
 
-function applyTemplate(template: typeof templates[number]) {
+function applyTemplate(template: ZodiacHomophoneTemplate) {
   form.fontColor = template.fontColor
   form.zodiacFontColor = template.zodiacFontColor
   form.bgColor = template.bgColor
+
+  if (template.fontSize) form.fontSize = template.fontSize
+  if (template.fontWeight) form.fontWeight = template.fontWeight
+  if (template.textAlign) form.textAlign = template.textAlign
+  if (template.textVerticalAlign) form.textVerticalAlign = template.textVerticalAlign
+  if (template.lineSpacing) form.lineSpacing = template.lineSpacing
+}
+
+function saveCustomTemplate() {
+  customTemplates.value.push({
+    fontColor: form.fontColor,
+    zodiacFontColor: form.zodiacFontColor,
+    bgColor: form.bgColor,
+    fontSize: form.fontSize,
+    fontWeight: form.fontWeight,
+    textAlign: form.textAlign,
+    textVerticalAlign: form.textVerticalAlign,
+    lineSpacing: form.lineSpacing,
+    borderColor: form.bgColor === '#ffffff' ? '#000000' : undefined,
+  })
+}
+
+function removeCustomTemplate(index: number) {
+  if (confirm('確定要刪除此自訂範本？')) {
+    customTemplates.value.splice(index, 1)
+  }
 }
 
 function downloadImage() {

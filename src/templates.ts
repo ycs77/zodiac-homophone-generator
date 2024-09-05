@@ -1,4 +1,6 @@
-export const templates = [
+import type { ZodiacHomophoneTemplate } from './types'
+
+export const templates: ZodiacHomophoneTemplate[] = [
   {
     fontColor: '#000000',
     zodiacFontColor: '#ff0000',
@@ -20,4 +22,4 @@ export const templates = [
     zodiacFontColor: '#ffff00',
     bgColor: '#0066ff',
   },
-]
+] satisfies ZodiacHomophoneTemplate[]
