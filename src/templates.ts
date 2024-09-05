@@ -13,6 +13,11 @@ export const templates = [
   {
     fontColor: '#ffffff',
     zodiacFontColor: '#ffff00',
-    bgColor: '#2563eb',
+    bgColor: '#ee0000',
+  },
+  {
+    fontColor: '#ffffff',
+    zodiacFontColor: '#ffff00',
+    bgColor: '#0066ff',
   },
 ]
