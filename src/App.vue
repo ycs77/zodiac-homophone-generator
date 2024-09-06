@@ -48,10 +48,11 @@
           :class="{ hidden: currentTab !== 'template' }"
         >
           <h4 class="text-xl font-bold">範本</h4>
-          <div class="mt-3 flex gap-3">
+          <div class="mt-3 flex flex-wrap gap-3">
             <div
               v-for="template in templates"
               :key="`template-c${template.fontColor}-bg${template.bgColor}`"
+              class="shrink-0"
             >
               <button
                 type="button"
@@ -68,12 +69,12 @@
             </div>
           </div>
 
-          <h4 class="mt-5 text-lg font-bold">自訂範本 <span class="text-xs text-gray-400">儲存在瀏覽器 (localStorage) 中</span></h4>
-          <div class="mt-3 flex gap-3">
+          <h4 class="mt-5 text-lg font-bold">自訂範本 <span class="text-xs text-gray-400">點擊+號保存當前設定到瀏覽器 (localStorage) 中</span></h4>
+          <div class="mt-3 flex flex-wrap gap-3">
             <div
               v-for="(template, index) in customTemplates"
               :key="`template-c${template.fontColor}-bg${template.bgColor}`"
-              class="relative"
+              class="relative shrink-0"
             >
               <button
                 type="button"
@@ -99,7 +100,7 @@
             <button
               type="button"
               class="w-9 h-9 flex justify-center items-center bg-gray-100 font-bold border-dashed border-2 border-black"
-              title="儲存當前設定到瀏覽器 (localStorage) 中"
+              title="保存當前設定到瀏覽器 (localStorage) 中"
               @click="saveCustomTemplate"
             >
               <HeroiconsPlusSmall20Solid class="size-6" />
