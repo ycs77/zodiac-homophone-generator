@@ -26,12 +26,12 @@
             max-w-[70vw] max-h-[70vw]
           "
         >
-          <Canvas v-bind="form" ref="canvasRef" class="min-w-0 min-h-0" />
+          <Canvas v-bind="form" ref="canvasRef" class="min-w-0 min-h-0 z-[2]" />
         </div>
       </main>
     </div>
 
-    <div class="relative md:w-[260px] lg:w-[320px] flex flex-col bg-white border-t-2 md:border-t-0 md:border-l-2 border-black">
+    <div class="relative z-[3] md:w-[260px] lg:w-[320px] flex flex-col bg-white border-t-2 md:border-t-0 md:border-l-2 border-black">
       <div class="relative grow min-h-0 max-h-[300px] md:max-h-none overflow-y-auto">
         <div
           class="px-5 py-4 md:block md:py-5 md:border-b-2 md:border-black"
@@ -295,7 +295,7 @@
       </nav>
     </div>
 
-    <footer class="absolute left-4 bottom-16 md:bottom-3 z-[-1] md:z-auto text-xs text-gray-400">
+    <footer class="absolute left-4 bottom-16 md:bottom-3 z-[1] md:z-auto text-xs text-gray-400">
       網站由 <a href="https://star-note-lucas.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-gray-600">Lucas Yang</a> 製作，<a href="https://github.com/justfont/AllPunType" target="_blank" rel="noopener noreferrer" class="text-gray-600">諧靈附體</a> 字型來自 <a href="https://justfont.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600">justfont</a>
     </footer>
   </div>
