@@ -26,12 +26,12 @@
             max-w-[70vw] max-h-[70vw]
           "
         >
-          <Canvas v-bind="form" ref="canvasRef" class="min-w-0 min-h-0 z-[2]" />
+          <Canvas v-bind="form" ref="canvasRef" class="min-w-0 min-h-0 z-2" />
         </div>
       </main>
     </div>
 
-    <div class="relative z-[3] md:w-[260px] lg:w-[320px] flex flex-col bg-white border-t-2 md:border-t-0 md:border-l-2 border-black">
+    <div class="relative z-3 md:w-[260px] lg:w-[320px] flex flex-col bg-white border-t-2 md:border-t-0 md:border-l-2 border-black">
       <div class="relative grow min-h-0 max-h-[300px] md:max-h-none overflow-y-auto">
         <div
           class="px-5 py-4 md:block md:py-5 md:border-b-2 md:border-black"
@@ -90,7 +90,7 @@
               </button>
               <button
                 type="button"
-                class="absolute top-0 right-0 w-4 h-4 flex justify-center items-center bg-white hover:bg-gray-200 font-bold border border-black translate-x-1/3 -translate-y-1/3 before:absolute before:block before:w-full before:h-full before:scale-[2]"
+                class="absolute top-0 right-0 w-4 h-4 flex justify-center items-center bg-white hover:bg-gray-200 font-bold border border-black translate-x-1/3 -translate-y-1/3 before:absolute before:block before:w-full before:h-full before:scale-2"
                 title="刪除此自訂範本"
                 @click="removeCustomTemplate(index)"
               >
@@ -146,21 +146,21 @@
             >
               <RadioGroupItem
                 id="textAlignLeft"
-                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
+                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-hidden"
                 value="left"
               >
                 左
               </RadioGroupItem>
               <RadioGroupItem
                 id="textAlignRight"
-                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
+                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-hidden"
                 value="center"
               >
                 中
               </RadioGroupItem>
               <RadioGroupItem
                 id="textAlignCenter"
-                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
+                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-hidden"
                 value="right"
               >
                 右
@@ -176,21 +176,21 @@
             >
               <RadioGroupItem
                 id="textVerticalAlignTop"
-                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
+                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-hidden"
                 value="top"
               >
                 上
               </RadioGroupItem>
               <RadioGroupItem
                 id="textVerticalAlignMiddle"
-                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
+                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-hidden"
                 value="middle"
               >
                 中
               </RadioGroupItem>
               <RadioGroupItem
                 id="textVerticalAlignBottom"
-                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-none"
+                class="w-7 h-7 flex justify-center items-center bg-white data-[state=checked]:bg-black data-[state=checked]:text-white font-bold border-2 border-black focus:ring-1 focus:ring-black focus:outline-hidden"
                 value="bottom"
               >
                 下
@@ -206,10 +206,10 @@
             <SwitchRoot
               id="airplane-mode"
               v-model:checked="form.enableAllPunType"
-              class="relative w-[48px] h-[20px] flex bg-black/50 data-[state=checked]:bg-black shadow-sm cursor-default focus-within:outline focus-within:outline-black"
+              class="relative w-[48px] h-[20px] flex bg-black/50 data-[state=checked]:bg-black shadow-xs focus:outline-hidden focus-within:ring-2 focus-within:ring-black"
             >
               <SwitchThumb
-                class="block w-[14px] h-[14px] my-auto bg-white transition-transform duration-100 translate-x-[3px] will-change-transform data-[state=checked]:translate-x-[31px] shadow-sm"
+                class="block w-[14px] h-[14px] my-auto bg-white transition-transform duration-100 translate-x-[3px] will-change-transform data-[state=checked]:translate-x-[31px] shadow-xs"
               />
             </SwitchRoot>
           </div>
@@ -236,7 +236,7 @@
         </button>
       </div>
 
-      <div class="hidden md:block relative z-[1] p-3 -mt-[2px] bg-white border-t-2 border-black">
+      <div class="hidden md:block relative z-1 p-3 -mt-[2px] bg-white border-t-2 border-black">
         <button
           type="button"
           class="block w-full bg-black text-white py-3 text-lg font-bold"
@@ -295,7 +295,7 @@
       </nav>
     </div>
 
-    <footer class="absolute left-4 bottom-16 md:bottom-3 z-[1] md:z-auto text-xs text-gray-400">
+    <footer class="absolute left-4 bottom-16 md:bottom-3 z-1 md:z-auto text-xs text-gray-400">
       網站由 <a href="https://star-note-lucas.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-gray-600">Lucas Yang</a> 製作，<a href="https://github.com/justfont/AllPunType" target="_blank" rel="noopener noreferrer" class="text-gray-600">諧靈附體</a> 字型來自 <a href="https://justfont.com/" target="_blank" rel="noopener noreferrer" class="text-gray-600">justfont</a>
     </footer>
   </div>

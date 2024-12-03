@@ -1,5 +1,7 @@
-@layer base {
-  body {
-    @apply font-serif font-light selection:bg-black selection:text-white;
-  }
+body {
+  @apply font-serif font-light selection:bg-black selection:text-white;
+}
+
+button {
+  @apply cursor-pointer;
 }
